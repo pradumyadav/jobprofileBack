@@ -6,6 +6,7 @@ import Protected from "./features/auth/components/Protected";
 import HomePage from "./pages/HomePage";
 import CoursePage from "./pages/CoursePage";
 import LecturePage from "./pages/LecturePage";
+import JobForm from "./features/ApplyForm/JobForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
     element: (
       <Protected>
         <LecturePage />,
+      </Protected>
+    ),
+  },
+  {
+    path: "/jobform",
+    element: (
+      <Protected>
+        <JobForm/>,
       </Protected>
     ),
   },

@@ -1,15 +1,14 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createLectureAsync,
   getLectureAsync,
   selectAllLecture,
-  clearError
+  clearError,
 } from "./lectureSlice";
 import { getUserAsync, selectUser } from "../auth/authSlice";
-import "./Lecture.css"
+import "./Lecture.css";
+import { Link } from "react-router-dom";
 const LectureForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -24,7 +23,7 @@ const LectureForm = () => {
     skills: "",
     experienceRequired: "",
     salary: 0,
-    extraInformation: ""
+    extraInformation: "",
   });
 
   const handleInputChange = (e) => {
@@ -51,9 +50,8 @@ const LectureForm = () => {
     dispatch(getUserAsync());
   }, []);
 
-  const handleApply = () => {
+  const handleApply = (id) => {
     console.log("Sending email...");
-    // Implement email sending logic here
   };
 
   return (
@@ -148,7 +146,6 @@ const LectureForm = () => {
           </label>
           <br />
 
-     
           <label>
             Extra Information:
             <input
@@ -163,10 +160,6 @@ const LectureForm = () => {
 
           <button type="submit">Submit</button>
         </form>
-      )}
-
-{user && user.role !== "admin" && (
-        <button onClick={handleApply}>Apply</button>
       )}
 
       <div className="table-container">
@@ -193,7 +186,12 @@ const LectureForm = () => {
                 <td>{item.skills}</td>
                 <td>{item.experienceRequired}</td>
                 <td>{item.salary}</td>
-                <td>{item.extraInformation}</td> 
+                <td>{item.extraInformation}</td>
+                {user && user.role !== "admin" && (
+                  <Link to="/jobform">
+                    <button onClick={() => handleApply(item._id)}>Apply</button>
+                  </Link>
+                )}
               </tr>
             ))}
           </tbody>
@@ -204,7 +202,3 @@ const LectureForm = () => {
 };
 
 export default LectureForm;
-
-
-
-
