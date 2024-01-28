@@ -37,7 +37,7 @@ const JobForm= () => {
       formDataToSend.append('resume', formData.resume); // Pass the file directly
       formDataToSend.append('coverLetter', formData.coverLetter);
   
-      const response = await axios.post('http://localhost:8080/jobform/submit', formDataToSend, {
+      const response = await axios.post('https://jobprofilebackend.onrender.com/jobform/submit', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
